@@ -8,6 +8,7 @@ Place this folder alongside gem5's installation as follows:
 path-to-gem5/
 |		
 ---->gem5/
+|
 ---->create-disk-images/
 
 Now change directory into create-disk-images and run ./create-disk-images.sh
