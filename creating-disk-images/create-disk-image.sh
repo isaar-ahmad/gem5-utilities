@@ -1,5 +1,9 @@
-CREATE_DISK_IMAGES=/home/isaar/Documents/creating-disk-images
-cd /home/isaar/Documents/gem5/
+#if your path to gem5 is "/path-to-gem5/gem5"
+#then place this folder in "/path-to/gem5/"
+#then set CREATE_DISK_IMAGES=/path-to-gem5/creating-disk-images
+PATH_TO_GEM5=
+CREATE_DISK_IMAGES=${PATH_TO_GEM5}/creating-disk-images
+cd ${PATH_TO_GEM5}/gem5
 
 # init 4 GB image file
 util/gem5img.py init ubuntu-test.img 4096
@@ -30,4 +34,6 @@ sudo umount mnt
 #
 # remove recently created loopback device from /dev/ using losetup, example:
 # sudo losetup -d /dev/loop0 (if loop0 was the loopback device created when the image was mounted)
-#
+# you can check this with shell command: "ls /dev/ -lrt | grep loop"
+# This command shows list of loopback devices. 
+# Delete one with the most recent date/time of modification (nearly the same date/time as when you ran this script).
