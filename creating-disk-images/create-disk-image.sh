@@ -1,8 +1,9 @@
 #if your path to gem5 is "/path-to-gem5/gem5"
 #then place this folder in "/path-to/gem5/"
 #then set CREATE_DISK_IMAGES=/path-to-gem5/creating-disk-images
-PATH_TO_GEM5=
-CREATE_DISK_IMAGES=${PATH_TO_GEM5}/creating-disk-images
+DISK_IMAGE_FILE=vivid-preinstalled-core-amd64.tar.gz
+PATH_TO_GEM5=/home/isaar/Documents
+CREATE_DISK_IMAGES=${PATH_TO_GEM5}/gem5-utilities/creating-disk-images
 cd ${PATH_TO_GEM5}/gem5
 
 # init 4 GB image file
@@ -13,7 +14,7 @@ mkdir mnt
 util/gem5img.py mount ubuntu-test.img mnt
 
 #extract ubuntu-core-14.10 image onto mount point
-sudo tar xzvf ${CREATE_DISK_IMAGES}/ubuntu-core-14.10-core-amd64.tar.gz -C mnt
+sudo tar xzvf ${CREATE_DISK_IMAGES}/${DISK_IMAGE_FILE} -C mnt
 
 #copy required files from your own system disk to new mounted disk
 sudo cp /etc/resolv.conf mnt/etc/
@@ -24,7 +25,10 @@ sudo cp ${CREATE_DISK_IMAGES}/fstab mnt/etc/
 #make m5 binary in host and copy m5 binary to disk
 cd util/m5
 make -f Makefile.x86
+
+#return to gem5 home directory
 cd ../..
+
 sudo cp util/m5/m5 mnt/sbin/
 #unmount image finally
 util/gem5img.py umount mnt
@@ -32,7 +36,7 @@ sudo umount mnt
 
 ###
 #
-# remove recently created loopback device from /dev/ using losetup, example:
+# remove recently created loopback device from /dev/ using losetup, Example:
 # sudo losetup -d /dev/loop0 (if loop0 was the loopback device created when the image was mounted)
 # you can check this with shell command: "ls /dev/ -lrt | grep loop"
 # This command shows list of loopback devices. 
