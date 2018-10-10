@@ -1,2 +1,5 @@
-# gem5-utilities
-Scripts and code modifications to gem5 for common use cases
+# utility scripts
+Some common usage scripts I created for:
+1. gem5
+2. Raspberry
+
