@@ -30,3 +30,7 @@ llc -O0 -disable-fp-elim -filetype=asm -o full.s full.llvm
 #generates triad-instrumented
 gcc -static -O0 -fno-inline -o triad-instrumented full.s -lm -lz
 # gcc -static -O0 -fno-inline -o ${source}-instrumented full.s -lm -lz
+
+#generate .dot file to visualize CDFG using xdot
+#note: use the unoptimized ${source}.llvm file
+opt -dot-cfg ${source}.llvm
